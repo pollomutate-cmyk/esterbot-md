@@ -1,0 +1,24 @@
+name: WhatsApp Bot 24/7
+
+on:
+  push:
+    branches: [ main, principal ]
+  schedule:
+    - cron: '*/15 * * * *' # Esto lo despierta automáticamente cada 15 minutos
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar Código
+        uses: actions/checkout@v3
+
+      - name: Instalar Node.js
+        uses: actions/tools/node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependencias y Arrancar Bot
+        run: |
+          npm install
+          node index.js
